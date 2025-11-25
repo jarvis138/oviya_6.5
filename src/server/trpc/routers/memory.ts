@@ -75,7 +75,7 @@ export const memoryRouter = router({
         content: z.string().min(1),
         category: z.enum(['personal_fact', 'preference', 'event', 'pattern']),
         importance: z.number().min(1).max(10),
-        metadata: z.record(z.unknown()).optional(),
+        metadata: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

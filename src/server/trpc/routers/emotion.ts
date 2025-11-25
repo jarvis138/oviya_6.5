@@ -31,23 +31,23 @@ export const emotionRouter = router({
         .pop();
 
       // Check for crisis first
-      const crisisAnalysis = lastUserMessage
-        ? detectCrisis(lastUserMessage.content)
-        : { isCrisis: false };
+      if (lastUserMessage) {
+        const crisisAnalysis = detectCrisis(lastUserMessage.content);
 
-      if (crisisAnalysis.isCrisis) {
-        // Get helplines based on user's country (default to US)
-        const userCountry = 'US'; // Would come from user profile
-        const helplines = getHelplinesByCountry(userCountry);
+        if (crisisAnalysis.isCrisis) {
+          // Get helplines based on user's country (default to US)
+          const userCountry = 'US'; // Would come from user profile
+          const helplines = getHelplinesByCountry(userCountry);
 
-        return {
-          emotion: 'anxious' as const,
-          intensity: 0.9,
-          isCrisis: true,
-          crisisType: crisisAnalysis.type,
-          confidence: crisisAnalysis.confidence,
-          helplines,
-        };
+          return {
+            emotion: 'anxious' as const,
+            intensity: 0.9,
+            isCrisis: true,
+            crisisType: crisisAnalysis.type,
+            confidence: crisisAnalysis.confidence,
+            helplines,
+          };
+        }
       }
 
       // Analyze emotion from conversation

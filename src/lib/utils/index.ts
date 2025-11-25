@@ -2,9 +2,7 @@
 // OVIYA - Utility Functions
 // ============================================
 
-import { type ClassValue, clsx } from 'clsx';
-
-// Conditional class names (simplified version without clsx dependency)
+// Conditional class names (simplified version)
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ');
 }
